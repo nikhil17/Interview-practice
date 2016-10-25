@@ -8,6 +8,7 @@ class SinglyLinkedList(object):
 		self.head = None
 		self.tail = None
 
+
 	def add(self,value):
 		if not self.head:
 			self.head = Node(value)
@@ -30,10 +31,10 @@ class SinglyLinkedList(object):
 	
 	# returns an iterator of the nodes in the list
 	def iterateNodes(self):
-		n, i = self.head, 0
-		while (i < self.size):
-			yield n
-			n, i = n.next, i + 1
+		curr = self.head
+		while (curr):
+			yield curr
+			curr = curr.next
 
 
 	def getNodeAtIndex(self, index):
@@ -82,6 +83,8 @@ class SinglyLinkedList(object):
 				
 				prev = current
 				current = current.next
+		if found and current == self.tail:
+			self.tail = prev
 
 		if not found:
 			print 'Node with given value is not in list'
@@ -97,6 +100,13 @@ class UnitTestSinglyLinkedList(unittest.TestCase):
 		self.assertEqual(s.listify(), [1,2,3])
 		s.addToHead(99)
 		self.assertEqual(s.listify(), [99,1,2,3])
+		
+		s.deleteNodeValue(3)
+		print s.listify()
+		s.add(10)
+		print 'added 10'
+		print s.listify()
+		self.assertEqual(s.listify(), [99,1,2,10])
 
 		x = SinglyLinkedList()
 		self.assertEqual(x.listify(), [])
@@ -122,19 +132,7 @@ class UnitTestSinglyLinkedList(unittest.TestCase):
 
 		s.deleteNodeValue(3)
 		self.assertEqual(s.listify(), [2])
+
 if __name__ == '__main__':
     unittest.main()
 
-x = SinglyLinkedList()
-x.add(1)
-x.add(2)
-x.add(3)
-x.add(4)
-x.add(5)
-x.printList()
-x.addToHead(0)
-x.printList()
-x.deleteNodeValue(0)
-x.deleteNodeValue(5)
-
-print x.listify()

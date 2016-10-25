@@ -4,9 +4,15 @@ class Node(object):
 	def __init__(self, value = None):
 		self.value = value
 		self.next = None
-		self.prev = None
 	
 	# Override object to string to be the node value
 	def __str__(self):
 		return str(self.value)
 	
+class Node2(Node):
+	def __init__(self, value = None):
+		self.prev = None
+		super(Node2, self).__init__(value)
+
+a = Node2(3)
+print a.prev
