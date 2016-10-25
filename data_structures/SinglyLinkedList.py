@@ -1,4 +1,5 @@
 from node import Node
+import unittest
 
 class SinglyLinkedList(object):
 
@@ -48,6 +49,18 @@ class SinglyLinkedList(object):
 		print 'using generator'
 		for n in self.iterateNodes():
 			print n.value
+
+	def listify(self):
+		x = list()
+		for n in self.iterateNodes():
+			x.append(n.value)
+		return x
+
+	def contains(self, value):
+		for n in self.iterateNodes():
+			if n.value is value:
+				return True
+		return False
 	
 	# searches for 
 	def deleteNodeValue(self, value):
@@ -74,6 +87,44 @@ class SinglyLinkedList(object):
 			print 'Node with given value is not in list'
 
 
+class UnitTestSinglyLinkedList(unittest.TestCase):
+	def testAdd(self):
+		s = SinglyLinkedList()
+		s.add(1)
+		s.add(2)
+		s.add(3)
+		# print s.listify()
+		self.assertEqual(s.listify(), [1,2,3])
+		s.addToHead(99)
+		self.assertEqual(s.listify(), [99,1,2,3])
+
+		x = SinglyLinkedList()
+		self.assertEqual(x.listify(), [])
+
+	def testContains(self):
+		s = SinglyLinkedList()
+		s.add(1)
+		s.add(2)
+		s.add(3)
+		self.assertTrue(s.contains(3))
+		self.assertFalse(s.contains(5))
+
+	def testDelete(self):
+		s = SinglyLinkedList()
+		s.add(1)
+		s.add(2)
+		s.add(3)
+		s.deleteNodeValue(4)
+		self.assertEqual(s.listify(), [1,2,3])
+
+		s.deleteNodeValue(1)
+		self.assertEqual(s.listify(), [2,3])
+
+		s.deleteNodeValue(3)
+		self.assertEqual(s.listify(), [2])
+if __name__ == '__main__':
+    unittest.main()
+
 x = SinglyLinkedList()
 x.add(1)
 x.add(2)
@@ -86,4 +137,4 @@ x.printList()
 x.deleteNodeValue(0)
 x.deleteNodeValue(5)
 
-x.printList()
+print x.listify()
