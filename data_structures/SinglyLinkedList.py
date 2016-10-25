@@ -1,12 +1,50 @@
 from node import Node
 import unittest
 
-class SinglyLinkedList(object):
-
+class MyList(object):
 	def __init__(self):
 		self.size = 0
 		self.head = None
 		self.tail = None
+
+	def iterateNodes(self):
+		curr = self.head
+		while (curr):
+			yield curr
+			curr = curr.next
+
+	def printList(self):
+		print 'using generator'
+		for n in self.iterateNodes():
+			print n.value
+
+	def listify(self):
+		x = list()
+		for n in self.iterateNodes():
+			x.append(n.value)
+		return x
+
+	def contains(self, value):
+		for n in self.iterateNodes():
+			if n.value is value:
+				return True
+		return False
+
+	def getNodeAtIndex(self, index):
+		if (index > self.size):
+			print 'Invalid Index entered'
+			return None
+		i, n = 0, self.head
+		while n and (i< index):
+			n = n.next 
+			i += 1
+		return n
+
+
+class SinglyLinkedList(MyList):
+
+	def __init__(self):
+		super(SinglyLinkedList, self).__init__()
 
 
 	def add(self,value):
@@ -25,44 +63,9 @@ class SinglyLinkedList(object):
 		if self.head:
 			n.next = self.head
 		self.head, self.size = n, self.size + 1
-
-	def list(self):
-		return self
 	
-	# returns an iterator of the nodes in the list
-	def iterateNodes(self):
-		curr = self.head
-		while (curr):
-			yield curr
-			curr = curr.next
 
 
-	def getNodeAtIndex(self, index):
-		if (index > self.size):
-			print 'Invalid Index'
-			return None
-		i, n = 0, self.head
-		# while (i< self.size):
-
-
-
-	def printList(self):
-		print 'using generator'
-		for n in self.iterateNodes():
-			print n.value
-
-	def listify(self):
-		x = list()
-		for n in self.iterateNodes():
-			x.append(n.value)
-		return x
-
-	def contains(self, value):
-		for n in self.iterateNodes():
-			if n.value is value:
-				return True
-		return False
-	
 	# searches for 
 	def deleteNodeValue(self, value):
 		current = self.head
@@ -96,16 +99,13 @@ class UnitTestSinglyLinkedList(unittest.TestCase):
 		s.add(1)
 		s.add(2)
 		s.add(3)
-		# print s.listify()
 		self.assertEqual(s.listify(), [1,2,3])
 		s.addToHead(99)
 		self.assertEqual(s.listify(), [99,1,2,3])
 		
 		s.deleteNodeValue(3)
-		print s.listify()
 		s.add(10)
-		print 'added 10'
-		print s.listify()
+		
 		self.assertEqual(s.listify(), [99,1,2,10])
 
 		x = SinglyLinkedList()
@@ -127,11 +127,18 @@ class UnitTestSinglyLinkedList(unittest.TestCase):
 		s.deleteNodeValue(4)
 		self.assertEqual(s.listify(), [1,2,3])
 
-		s.deleteNodeValue(1)
-		self.assertEqual(s.listify(), [2,3])
+		s.deleteNodeValue(2)
+		self.assertEqual(s.listify(), [1,3])
 
 		s.deleteNodeValue(3)
-		self.assertEqual(s.listify(), [2])
+		self.assertEqual(s.listify(), [1])
+
+	def testGetIndex(self):
+		s = SinglyLinkedList()
+		s.add(1)
+		s.add(2)
+		s.add(3)
+		self.assertEqual(s.getNodeAtIndex(0).value, 1)
 
 if __name__ == '__main__':
     unittest.main()
