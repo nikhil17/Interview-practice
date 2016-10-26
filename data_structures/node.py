@@ -13,5 +13,4 @@ class Node(object):
 class Node2(Node):
 	def __init__(self, value = None):
 		self.prev = None
-		super(Node2, self).__init__(value)
-
+		super(Node2, self).__init__(value)       

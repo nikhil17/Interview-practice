@@ -7,30 +7,30 @@ class MyList(object):
 		self.head = None
 		self.tail = None
 
-	def iterateNodes(self):
+	def iterate_nodes(self):
 		curr = self.head
 		while (curr):
 			yield curr
 			curr = curr.next
 
-	def printList(self):
+	def print_list(self):
 		print 'using generator'
-		for n in self.iterateNodes():
+		for n in self.iterate_nodes():
 			print n.value
 
 	def listify(self):
 		x = list()
-		for n in self.iterateNodes():
+		for n in self.iterate_nodes():
 			x.append(n.value)
 		return x
 
 	def contains(self, value):
-		for n in self.iterateNodes():
-			if n.value is value:
+		for n in self.iterate_nodes():
+			if n.value == value:
 				return True
 		return False
 
-	def getNodeAtIndex(self, index):
+	def get_node_at_index(self, index):
 		if (index > self.size):
 			print 'Invalid Index entered'
 			return None
@@ -48,6 +48,9 @@ class SinglyLinkedList(MyList):
 
 
 	def add(self,value):
+		if value == None:
+			print 'Attempted to add none as a value'
+			return
 		if not self.head:
 			self.head = Node(value)
 			self.tail = self.head
@@ -59,6 +62,9 @@ class SinglyLinkedList(MyList):
 		self.size += 1
 
 	def addToHead(self, value):
+		if value == None:
+			print 'Attempted to add none as a value'
+			return
 		n = Node(value)
 		if self.head:
 			n.next = self.head
@@ -138,7 +144,7 @@ class UnitTestSinglyLinkedList(unittest.TestCase):
 		s.add(1)
 		s.add(2)
 		s.add(3)
-		self.assertEqual(s.getNodeAtIndex(0).value, 1)
+		self.assertEqual(s.get_node_at_index(0).value, 1)
 
 if __name__ == '__main__':
     unittest.main()

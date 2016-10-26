@@ -6,7 +6,7 @@ class CircularDoublyLinkedList(MyList):
 	def __init__(self):
 		super(CircularDoublyLinkedList, self).__init__()
 
-	def iterateNodes(self):
+	def iterate_nodes(self):
 		curr, x = self.head, 0
 		while (x < self.size):
 			yield curr

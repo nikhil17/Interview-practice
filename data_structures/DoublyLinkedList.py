@@ -11,7 +11,6 @@ class DoublyLinkedList(MyList):
 		n = Node2(value)
 		if self.head == None:
 			self.head = self.tail = n
-
 		else:
 			self.tail.next = n
 			n.prev, self.tail = self.tail, n
@@ -19,7 +18,7 @@ class DoublyLinkedList(MyList):
 			
 		self.size += 1
 
-	def addToHead(self, value):
+	def add_to_head(self, value):
 		n = Node2(value)
 		if self.head == None:
 			self.head = self.tail = n
@@ -63,7 +62,7 @@ class DoublyLinkedList(MyList):
 		else:
 			print str(value) + ' is not in the list'
 				
-	
+
 	
 
 class UnitTestDoublyLinkedList(unittest.TestCase):
@@ -92,6 +91,7 @@ class UnitTestDoublyLinkedList(unittest.TestCase):
 		s.add(3)
 		
 		s.deleteNode(2)
+		s.deleteNode(None)
 		self.assertEqual(s.listify(), [1,3])
 		s.deleteNode(2)
 
