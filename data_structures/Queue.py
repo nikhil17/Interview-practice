@@ -1,4 +1,4 @@
-from SinglyLinkedList import MyList
+from singly_linked_list import MyList
 from node import Node
 import unittest
 

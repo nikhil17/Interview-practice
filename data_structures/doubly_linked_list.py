@@ -1,5 +1,5 @@
 from node import Node2
-from SinglyLinkedList import MyList
+from singly_linked_list import MyList
 import unittest
 
 class DoublyLinkedList(MyList):

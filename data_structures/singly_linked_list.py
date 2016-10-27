@@ -1,7 +1,7 @@
 from node import Node
 import unittest
 
-class MyList(object):
+class my_list(object):
 	def __init__(self):
 		self.size = 0
 		self.head = None
@@ -41,7 +41,7 @@ class MyList(object):
 		return n
 
 
-class SinglyLinkedList(MyList):
+class SinglyLinkedList(my_list):
 
 	def __init__(self):
 		super(SinglyLinkedList, self).__init__()
